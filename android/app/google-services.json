@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "599075507663",
+    "firebase_url": "https://safetylockfirebase-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "safetylockfirebase",
+    "storage_bucket": "safetylockfirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599075507663:android:3e7de16ae7cd1c803916ba",
+        "android_client_info": {
+          "package_name": "com.safelockapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjgUps4_lCeXe-_ccBayyRz3Arm2ePkq8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

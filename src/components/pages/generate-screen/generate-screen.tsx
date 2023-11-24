@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {
   View,
   ScrollView,
@@ -7,22 +7,42 @@ import {
   Pressable,
   Image,
   Dimensions,
+  RefreshControl,
 } from 'react-native';
 import GenerateQR from '../../templates/generate-qr-code';
-import {useNavigation} from '@react-navigation/core';
+import {useNavigation, useFocusEffect} from '@react-navigation/core';
+import {useState} from 'react';
 
 export default function GenerateScreen() {
+  const [refresh, setRefresh] = useState(false);
   const navigation = useNavigation();
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height - 96;
+
+  const pullMe = useCallback(() => {
+    setRefresh(true);
+
+    setTimeout(() => {
+      setRefresh(false);
+    }, 4000);
+  }, []);
 
   const back = () => {
     navigation.navigate('Detail' as never);
   };
 
+  useFocusEffect(
+    React.useCallback(() => {
+      pullMe();
+    }, [pullMe]),
+  );
   return (
     <SafeAreaView>
-      <ScrollView style={{backgroundColor: '#FFF'}}>
+      <ScrollView
+        style={{backgroundColor: '#FFF'}}
+        refreshControl={
+          <RefreshControl refreshing={refresh} onRefresh={pullMe} />
+        }>
         <View>
           <View
             style={{
@@ -62,20 +82,6 @@ export default function GenerateScreen() {
               gap: 48,
             }}>
             <GenerateQR />
-            <View>
-              <Pressable style={{backgroundColor: '#272262', borderRadius: 12}}>
-                <Text
-                  style={{
-                    fontFamily: 'poppinsBold',
-                    color: 'white',
-                    paddingHorizontal: 24,
-                    paddingVertical: 6,
-                    fontSize: 14,
-                  }}>
-                  Regenerate QR Code
-                </Text>
-              </Pressable>
-            </View>
           </View>
         </View>
       </ScrollView>

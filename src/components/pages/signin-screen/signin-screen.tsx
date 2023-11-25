@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import SocialMediaButton from '../../templates/social-media-button';
-import {useNavigation} from '@react-navigation/core';
+import {useNavigation, StackActions} from '@react-navigation/core';
 
 export default function SigninScreen() {
   const [email, setEmail] = useState('');
@@ -22,7 +22,7 @@ export default function SigninScreen() {
   const goToHome = () => {
     // if(email === "dummy@gmail.com" && password === "dummy"){
     // }
-    navigation.navigate('Home' as never);
+    navigation.dispatch(StackActions.replace('Home'))
   };
 
   return (
@@ -37,7 +37,7 @@ export default function SigninScreen() {
           }}>
           <Text
             style={{
-              fontFamily: 'poppinsBold',
+              fontFamily: 'Poppins Bold',
               color: '#DCD6F7',
               fontSize: 48,
             }}>
@@ -62,7 +62,7 @@ export default function SigninScreen() {
               paddingHorizontal: 10,
               borderRadius: 30,
               backgroundColor: '#F1F0F0',
-              fontFamily: 'poppins',
+              fontFamily: 'Poppins Regular',
               color: 'black',
             }}
             placeholder="Email"
@@ -77,7 +77,7 @@ export default function SigninScreen() {
               paddingHorizontal: 10,
               borderRadius: 30,
               backgroundColor: '#F1F0F0',
-              fontFamily: 'poppins',
+              fontFamily: 'Poppins Regular',
               color: 'black',
             }}
             placeholder="Password"
@@ -88,7 +88,7 @@ export default function SigninScreen() {
           <Text
             style={{
               marginVertical: 24,
-              fontFamily: 'poppins',
+              fontFamily: 'Poppins Regular',
               color: 'black',
             }}>
             Forgot Password?
@@ -105,17 +105,17 @@ export default function SigninScreen() {
             onPress={goToHome}>
             <Text
               style={{
-                fontFamily: 'poppinsSemibold',
+                fontFamily: 'Poppins SemiBold',
                 textAlign: 'center',
                 color: 'black',
               }}>
               Sign In
             </Text>
           </Pressable>
-          <Text style={{fontFamily: 'poppins', color: 'black'}}>OR</Text>
+          <Text style={{fontFamily: 'Poppins Regular', color: 'black'}}>OR</Text>
           <SocialMediaButton text="Sign in" />
           <Pressable onPress={goToRegister}>
-            <Text style={{fontFamily: 'poppins', color: 'black'}}>
+            <Text style={{fontFamily: 'Poppins Regular', color: 'black'}}>
               Don't have an account? Sign up
             </Text>
           </Pressable>

@@ -2,12 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, Image, ActivityIndicator} from 'react-native';
 import {generateString} from '../../utils/generate-string';
 import database from '@react-native-firebase/database';
+import { useNavigation, StackActions } from '@react-navigation/native';
 
 const IMAGE_SIZE = '500x500';
 
 export default function GenerateQR() {
   const [uri, setUri] = useState('');
   const [doorStatus, setDoorStatus] = useState(Boolean);
+  const navigation = useNavigation();
 
   function addQRToFirebase(qrString: number) {
     database().ref().update({
@@ -36,6 +38,10 @@ export default function GenerateQR() {
   }, []);
 
   fetchDoorStatus(doorStatus);
+  
+  if(doorStatus){
+    navigation.dispatch(StackActions.replace('Success'))
+  }
 
   return (
     <View
@@ -52,7 +58,7 @@ export default function GenerateQR() {
           <Text
             style={{
               fontSize: 16,
-              fontFamily: 'poppinsMedium',
+              fontFamily: 'Poppins Medium',
               color: 'black',
               paddingVertical: 24,
             }}>

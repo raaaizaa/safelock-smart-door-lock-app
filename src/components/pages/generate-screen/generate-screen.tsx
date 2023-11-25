@@ -60,7 +60,7 @@ export default function GenerateScreen() {
                 height={30}
               />
             </Pressable>
-            <Text style={{fontFamily: 'poppinsBold', fontSize: 16}}>
+            <Text style={{fontFamily: 'Poppins Bold', fontSize: 16, color:'black'}}>
               QR Code
             </Text>
             <Pressable>

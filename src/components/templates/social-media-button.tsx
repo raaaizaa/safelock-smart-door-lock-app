@@ -23,7 +23,7 @@ export default function SocialMediaButton({text}: props) {
         <Image
           source={require('../../../assets/icon/flat-color-icons_google.png')}
         />
-        <Text style={{fontFamily: 'poppins', color: 'black'}}>
+        <Text style={{fontFamily: 'Poppins Regular', color: 'black'}}>
           {text} with Google
         </Text>
       </TouchableOpacity>
@@ -31,7 +31,7 @@ export default function SocialMediaButton({text}: props) {
         <Image
           source={require('../../../assets/icon/flat-color-icons_facebook.png')}
         />
-        <Text style={{fontFamily: 'poppins', color: '#FFFF'}}>
+        <Text style={{fontFamily: 'Poppins Regular', color: '#FFFF'}}>
           {text} with Facebook
         </Text>
       </TouchableOpacity>

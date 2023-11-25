@@ -3,11 +3,12 @@ import {View, Text, Image, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/core';
 
 interface Props {
+  id: number
   name: string;
   image: string;
 }
 
-export default function RoomCard({name, image}: Props) {
+export default function RoomCard({id, name, image}: Props) {
   const navigation = useNavigation();
 
   const goToDetail = () => {
@@ -33,7 +34,7 @@ export default function RoomCard({name, image}: Props) {
           style={{borderRadius: 12}}
         />
         <View style={{padding: 6, borderRadius: 12}}>
-          <Text style={{fontFamily: 'poppinsSemibold', color: 'black'}}>
+          <Text style={{fontFamily: 'Poppins SemiBold', color: 'black'}}>
             Room {name}
           </Text>
           <Pressable
@@ -49,7 +50,7 @@ export default function RoomCard({name, image}: Props) {
             onPress={goToDetail}>
             <Text
               style={{
-                fontFamily: 'poppinsSemibold',
+                fontFamily: 'Poppins SemiBold',
                 fontSize: 11,
                 color: 'black',
               }}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, SafeAreaView, ScrollView} from 'react-native';
+import {View, Text, SafeAreaView, ScrollView, Image} from 'react-native';
 import {roomItem} from '../../../constants/room';
 import RoomCard from '../../ui/room-card/room-card';
 import HostCard from '../../ui/host-card/host-card';
@@ -18,7 +18,7 @@ export default function Homescreen() {
           }}>
           <Text
             style={{
-              fontFamily: 'poppinsBold',
+              fontFamily: 'Poppins Bold',
               color: '#FFF',
               fontSize: 32,
               paddingStart: 24,
@@ -30,7 +30,7 @@ export default function Homescreen() {
           <View>
             <Text
               style={{
-                fontFamily: 'poppinsSemibold',
+                fontFamily: 'Poppins SemiBold',
                 color: '#403B80',
                 fontSize: 18,
                 paddingHorizontal: 24,
@@ -44,6 +44,7 @@ export default function Homescreen() {
               {roomItem.map((data, index) => (
                 <RoomCard
                   key={index}
+                  id={data.id}
                   name={data.name}
                   image="https://i.pinimg.com/564x/e5/e3/6c/e5e36c585a7a16c952215f47885f7da6.jpg"
                 />
@@ -54,12 +55,12 @@ export default function Homescreen() {
             <View>
               <Text
                 style={{
-                  fontFamily: 'poppinsSemibold',
+                  fontFamily: 'Poppins SemiBold',
                   color: '#403B80',
                   fontSize: 18,
                   paddingHorizontal: 24,
                 }}>
-                Host a new meeting
+                Add Your Own Meeting Room
               </Text>
               <HostCard />
             </View>

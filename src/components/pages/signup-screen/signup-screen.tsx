@@ -29,7 +29,7 @@ export default function SignupScreen() {
           }}>
           <Text
             style={{
-              fontFamily: 'poppinsBold',
+              fontFamily: 'Poppins Bold',
               color: '#DCD6F7',
               fontSize: 48,
             }}>
@@ -55,7 +55,7 @@ export default function SignupScreen() {
                 paddingHorizontal: 10,
                 borderRadius: 30,
                 backgroundColor: '#F1F0F0',
-                fontFamily: 'poppins',
+                fontFamily: 'Poppins Regular',
                 color: 'black',
               }}
               placeholder="Email"
@@ -69,7 +69,7 @@ export default function SignupScreen() {
                 paddingHorizontal: 10,
                 borderRadius: 30,
                 backgroundColor: '#F1F0F0',
-                fontFamily: 'poppins',
+                fontFamily: 'Poppins Regular',
                 color: 'black',
               }}
               placeholder="Password"
@@ -84,7 +84,7 @@ export default function SignupScreen() {
                 paddingHorizontal: 10,
                 borderRadius: 30,
                 backgroundColor: '#F1F0F0',
-                fontFamily: 'poppins',
+                fontFamily: 'Poppins Regular',
                 color: 'black',
               }}
               placeholder="Confirm Password"
@@ -103,17 +103,17 @@ export default function SignupScreen() {
             }}>
             <Text
               style={{
-                fontFamily: 'poppinsSemibold',
+                fontFamily: 'Poppins SemiBold',
                 textAlign: 'center',
                 color: 'black',
               }}>
-              Sign In
+              Sign Up
             </Text>
           </Pressable>
-          <Text style={{fontFamily: 'poppins', color: 'black'}}>OR</Text>
+          <Text style={{fontFamily: 'Poppins Regular', color: 'black'}}>OR</Text>
           <SocialMediaButton text="Sign up" />
           <Pressable onPress={goToSignin}>
-            <Text style={{fontFamily: 'poppins', color: 'black'}}>
+            <Text style={{fontFamily: 'Poppins Regular', color: 'black'}}>
               Already have an account? Sign in
             </Text>
           </Pressable>

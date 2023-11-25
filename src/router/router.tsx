@@ -5,6 +5,8 @@ import SigninScreen from '../components/pages/signin-screen/signin-screen'
 import Homescreen from '../components/pages/homescreen/homescreen'
 import DetailScreen from '../components/pages/detail-screen/detail-screen'
 import GenerateScreen from '../components/pages/generate-screen/generate-screen'
+import SuccessScreen from '../components/pages/success-screen/success-screen'
+import AddRoomScreen from '../components/pages/add-room-screen/add-room-screen'
 
 const Stack = createStackNavigator()
 
@@ -20,6 +22,8 @@ export default function Router() {
       <Stack.Screen name="Home" component={Homescreen} />
       <Stack.Screen name="Detail" component={DetailScreen} />
       <Stack.Screen name = "Generate" component={GenerateScreen} />
+      <Stack.Screen name = "Success" component={SuccessScreen} />
+      <Stack.Screen name="AddRoom" component={AddRoomScreen} />
     </Stack.Navigator>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   View,
   SafeAreaView,
@@ -6,23 +6,23 @@ import {
   Text,
   Image,
   Pressable,
-} from 'react-native'
-import { useNavigation } from '@react-navigation/core'
+} from 'react-native';
+import {useNavigation} from '@react-navigation/core';
 
 export default function DetailScreen() {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const back = () => {
-    navigation.navigate('Home' as never)
-  }
+    navigation.navigate('Home' as never);
+  };
 
   const goToGenerateQR = () => {
-    navigation.navigate('Generate' as never)
-  }
+    navigation.navigate('Generate' as never);
+  };
 
   return (
-    <SafeAreaView style={{ flex: 1}}>
-      <ScrollView style={{ backgroundColor: '#FFF' }}>
+    <SafeAreaView style={{flex: 1}}>
+      <ScrollView style={{backgroundColor: '#FFF'}}>
         <View>
           <View
             style={{
@@ -33,14 +33,19 @@ export default function DetailScreen() {
               paddingHorizontal: 24,
               paddingVertical: 12,
             }}>
-            <Pressable android_ripple={{ color: '#F1F0F0' }} onPress={back}>
+            <Pressable android_ripple={{color: '#F1F0F0'}} onPress={back}>
               <Image
                 source={require('../../../../assets/icon/back.png')}
                 width={30}
                 height={30}
               />
             </Pressable>
-            <Text style={{ fontFamily: 'poppinsBold', fontSize: 16,               color: 'black' }}>
+            <Text
+              style={{
+                fontFamily: 'Poppins Bold',
+                fontSize: 16,
+                color: 'black',
+              }}>
               Detail
             </Text>
             <Pressable>
@@ -66,11 +71,11 @@ export default function DetailScreen() {
                 }}
                 width={350}
                 height={300}
-                style={{ borderRadius: 16 }}
+                style={{borderRadius: 16}}
               />
             </View>
-            <View style={{ paddingHorizontal: 24 }}>
-              <View style={{ paddingVertical: 12 }}>
+            <View style={{paddingHorizontal: 24}}>
+              <View style={{paddingVertical: 12}}>
                 <View
                   style={{
                     flex: 1,
@@ -78,10 +83,17 @@ export default function DetailScreen() {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                   }}>
-                  <Text style={{ fontFamily: 'poppinsBold', fontSize: 16,               color: 'black' }}>
+                  <Text
+                    style={{
+                      fontFamily: 'Poppins Bold',
+                      fontSize: 16,
+                      color: 'black',
+                    }}>
                     Room 1
                   </Text>
-                  <Text style={{ fontFamily: 'poppins' }}>16/20</Text>
+                  <Text style={{fontFamily: 'Poppins Regular', color: 'black'}}>
+                    16/20
+                  </Text>
                 </View>
               </View>
             </View>
@@ -95,7 +107,7 @@ export default function DetailScreen() {
               }}>
               <Text
                 style={{
-                  fontFamily: 'poppinsBold',
+                  fontFamily: 'Poppins Bold',
                   color: 'white',
                   fontSize: 14,
                   paddingVertical: 12,
@@ -104,7 +116,7 @@ export default function DetailScreen() {
               </Text>
               <Text
                 style={{
-                  fontFamily: 'poppins',
+                  fontFamily: 'Poppins Regular',
                   color: 'white',
                   textAlign: 'left',
                 }}>
@@ -121,10 +133,12 @@ export default function DetailScreen() {
                   paddingVertical: 6,
                   borderRadius: 6,
                 }}>
-                <Pressable onPress={goToGenerateQR}>
+                <Pressable
+                  onPress={goToGenerateQR}
+                  android_ripple={{color: '#F1F0F0'}}>
                   <Text
                     style={{
-                      fontFamily: 'poppinsBold',
+                      fontFamily: 'Poppins Bold',
                       textAlign: 'center',
                       color: '#403B80',
                     }}>
@@ -137,5 +151,5 @@ export default function DetailScreen() {
         </View>
       </ScrollView>
     </SafeAreaView>
-  )
+  );
 }

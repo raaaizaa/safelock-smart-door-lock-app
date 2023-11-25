@@ -34,7 +34,7 @@ export default function HostCard() {
         onPress={goToAddRoom}>
         <Image
           source={{
-            uri: 'https://i.pinimg.com/564x/e5/e3/6c/e5e36c585a7a16c952215f47885f7da6.jpg',
+            uri: 'https://cdn-5db27433f911da130c7ce697.closte.com/wp-content/uploads/2019/11/meetings-and-events.slide_.66-e1596476467588.jpg',
           }}
           width={200}
           height={200}

@@ -10,7 +10,7 @@ import {
   RefreshControl,
 } from 'react-native';
 import GenerateQR from '../../templates/generate-qr-code';
-import {useNavigation, useFocusEffect} from '@react-navigation/core';
+import {useNavigation, StackActions, useFocusEffect} from '@react-navigation/core';
 import {useState} from 'react';
 
 export default function GenerateScreen() {
@@ -28,7 +28,7 @@ export default function GenerateScreen() {
   }, []);
 
   const back = () => {
-    navigation.navigate('Detail' as never);
+    navigation.dispatch(StackActions.pop(1))
   };
 
   useFocusEffect(

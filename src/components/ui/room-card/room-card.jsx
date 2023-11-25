@@ -2,17 +2,11 @@ import React from 'react';
 import {View, Text, Image, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/core';
 
-interface Props {
-  id: number
-  name: string;
-  image: string;
-}
-
-export default function RoomCard({id, name, image}: Props) {
+export default function RoomCard({id, name, image}) {
   const navigation = useNavigation();
 
   const goToDetail = () => {
-    navigation.navigate('Detail' as never);
+    navigation.navigate('Detail', {id});
   };
   return (
     <View

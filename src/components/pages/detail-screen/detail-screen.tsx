@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   SafeAreaView,
@@ -6,24 +6,50 @@ import {
   Text,
   Image,
   Pressable,
+  Modal,
+  TextInput,
+  Button,
+  ToastAndroid,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/core';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../../../App';
+import {roomItem} from '../../../constants/room';
 
-export default function DetailScreen() {
-  const navigation = useNavigation();
+type DetailProps = NativeStackScreenProps<RootStackParamList, 'Detail'>;
+
+const DetailScreen = ({route}: DetailProps) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const {id} = route.params;
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [password, setPassword] = useState('');
 
   const back = () => {
     navigation.navigate('Home' as never);
   };
 
   const goToGenerateQR = () => {
-    navigation.navigate('Generate' as never);
+    if (password == selectedItem?.password) {
+      navigation.navigate('Generate' as never);
+    } else {
+      ToastAndroid.show('Wrong password!', ToastAndroid.SHORT);
+    }
   };
+
+  const toggleModal = () => {
+    setIsModalVisible(!isModalVisible);
+  };
+
+  const selectedItem = roomItem.find(item => item.id === id);
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <ScrollView style={{backgroundColor: '#FFF'}}>
-        <View>
+      <ScrollView style={{backgroundColor: '#403B80', flex: 1}}>
+        <View style={{flex: 1, backgroundColor: 'white'}}>
           <View
             style={{
               flex: 1,
@@ -66,9 +92,7 @@ export default function DetailScreen() {
                 paddingVertical: 24,
               }}>
               <Image
-                source={{
-                  uri: 'https://i.ytimg.com/vi/OTPXfmKLy5U/sddefault.jpg',
-                }}
+                source={{uri: selectedItem?.image}}
                 width={350}
                 height={300}
                 style={{borderRadius: 16}}
@@ -89,10 +113,10 @@ export default function DetailScreen() {
                       fontSize: 16,
                       color: 'black',
                     }}>
-                    Room 1
+                    Room {selectedItem?.name}
                   </Text>
                   <Text style={{fontFamily: 'Poppins Regular', color: 'black'}}>
-                    16/20
+                    {selectedItem?.checkedIn}/{selectedItem?.capacity}
                   </Text>
                 </View>
               </View>
@@ -104,6 +128,7 @@ export default function DetailScreen() {
                 paddingVertical: 12,
                 flex: 1,
                 flexDirection: 'column',
+                justifyContent: 'space-between',
               }}>
               <Text
                 style={{
@@ -120,8 +145,7 @@ export default function DetailScreen() {
                   color: 'white',
                   textAlign: 'left',
                 }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                {selectedItem?.description}
               </Text>
               <View
                 style={{
@@ -134,7 +158,7 @@ export default function DetailScreen() {
                   borderRadius: 6,
                 }}>
                 <Pressable
-                  onPress={goToGenerateQR}
+                  onPress={toggleModal}
                   android_ripple={{color: '#F1F0F0'}}>
                   <Text
                     style={{
@@ -149,7 +173,72 @@ export default function DetailScreen() {
             </View>
           </View>
         </View>
+        <Modal visible={isModalVisible} transparent={true}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'rgba(52, 52, 52, 0.8)',
+            }}>
+            <View
+              style={{
+                justifyContent: 'center',
+                borderRadius: 24,
+                padding: 20,
+                width: 300,
+                height: 200,
+                backgroundColor: 'white',
+                gap: 16,
+              }}>
+              <Text
+                style={{
+                  fontFamily: 'Poppins Bold',
+                  color: 'black',
+                  fontSize: 20,
+                }}>
+                Insert Password
+              </Text>
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                <TextInput
+                  placeholder={'Enter text'}
+                  placeholderTextColor={'black'}
+                  style={{
+                    color: 'black',
+                    borderBottomWidth: 1,
+                    width: 240,
+                    fontFamily: 'Poppins Regular',
+                  }}
+                  secureTextEntry
+                  onChangeText={text => setPassword(text)}
+                />
+              </View>
+              <View
+                style={{justifyContent: 'space-around', flexDirection: 'row'}}>
+                <Pressable
+                  android_ripple={{color: '#F1F0F0'}}
+                  onPress={toggleModal}
+                  style={{padding: 6}}>
+                  <Text style={{color: 'black', fontFamily: 'Poppins Regular'}}>
+                    Cancel
+                  </Text>
+                </Pressable>
+                <Pressable
+                  android_ripple={{color: '#F1F0F0'}}
+                  style={{padding: 6}}
+                  onPress={goToGenerateQR}>
+                  <Text style={{color: 'black', fontFamily: 'Poppins Regular'}}>
+                    Enter
+                  </Text>
+                </Pressable>
+              </View>
+            </View>
+          </View>
+        </Modal>
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
+
+export default DetailScreen;

@@ -4,7 +4,8 @@ import {roomItem} from '../../../constants/room';
 import RoomCard from '../../ui/room-card/room-card';
 import HostCard from '../../ui/host-card/host-card';
 
-export default function Homescreen() {
+
+const Homescreen = () => {
   return (
     <SafeAreaView style={{flex: 1, flexDirection: 'column'}}>
       <ScrollView style={{backgroundColor: '#FFF'}}>
@@ -46,7 +47,7 @@ export default function Homescreen() {
                   key={index}
                   id={data.id}
                   name={data.name}
-                  image="https://i.pinimg.com/564x/e5/e3/6c/e5e36c585a7a16c952215f47885f7da6.jpg"
+                  image={data.image}
                 />
               ))}
             </ScrollView>
@@ -70,3 +71,5 @@ export default function Homescreen() {
     </SafeAreaView>
   );
 }
+
+export default Homescreen

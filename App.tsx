@@ -32,6 +32,17 @@ type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
+export type RootStackParamList = {
+  Login: undefined,
+  Signin: undefined,
+  Signup: undefined,
+  Home: undefined
+  Detail: {id: number},
+  Generate: undefined,
+  Success: undefined,
+  AddRoom: undefined
+}
+
 function Section({children, title}: SectionProps): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (

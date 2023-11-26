@@ -10,6 +10,7 @@ export let roomItem = [
     checkedIn: 12,
     capacity: 20,
     check: false,
+    joined: ''
   },
   {
     id: 1,
@@ -22,6 +23,7 @@ export let roomItem = [
     checkedIn: 4,
     capacity: 12,
     check: false,
+    joined: ''
   },
   {
     id: 2,
@@ -34,5 +36,6 @@ export let roomItem = [
     checkedIn: 7,
     capacity: 13,
     check: false,
+    joined: ''
   },
 ];

@@ -5,21 +5,18 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-  ToastAndroid,
 } from 'react-native';
 
 interface props {
   text: string;
+  onPress: () => void
 }
 
-export default function SocialMediaButton({text}: props) {
-  const alertMessage = () => {
-    ToastAndroid.show('It is still... not functioning ...', ToastAndroid.SHORT);
-  };
+export default function SocialMediaButton({text, onPress}: props) {
 
   return (
     <View style={{width: '100%', marginVertical: 12}}>
-      <TouchableOpacity style={style.googleButton} onPress={alertMessage}>
+      <TouchableOpacity style={style.googleButton} onPress={onPress}>
         <Image
           source={require('../../../assets/icon/flat-color-icons_google.png')}
         />
@@ -27,7 +24,7 @@ export default function SocialMediaButton({text}: props) {
           {text} with Google
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity style={style.facebookButton} onPress={alertMessage}>
+      <TouchableOpacity style={style.facebookButton} onPress={onPress}>
         <Image
           source={require('../../../assets/icon/flat-color-icons_facebook.png')}
         />

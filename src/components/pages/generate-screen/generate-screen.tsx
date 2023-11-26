@@ -23,7 +23,7 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../../App';
-import { roomItem } from '../../../constants/room';
+import { roomItem } from '../../../variables/room';
 
 type QRProps = NativeStackScreenProps<RootStackParamList, 'Generate'>;
 
@@ -46,6 +46,13 @@ function fetchDoorStatus(setDoorStatus: React.Dispatch<React.SetStateAction<bool
   return () => database().ref().off('value', onValueChange);
 }
 
+function getCurrentTime () {
+  const today = new Date()
+  const time = today.toLocaleTimeString()
+
+  return time
+}
+
 const GenerateQR = ({ id, navigation }: { id: number, navigation: any }) => {
   const [uri, setUri] = useState('');
   const [doorStatus, setDoorStatus] = useState(false);
@@ -66,8 +73,9 @@ const GenerateQR = ({ id, navigation }: { id: number, navigation: any }) => {
     if (doorStatus) {
       roomItem[id].check = true
       roomItem[id].checkedIn += 1
+      roomItem[id].joined = getCurrentTime()
       navigation.dispatch(StackActions.pop(1));
-      navigation.dispatch(StackActions.replace('Success'));
+      navigation.dispatch(StackActions.replace('Success', {id}));
     }
   }, [doorStatus, id, navigation]);
 

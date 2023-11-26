@@ -113,12 +113,13 @@ export default function AddRoomScreen() {
           <View
             style={{flex: 1, justifyContent: 'center', paddingHorizontal: 24}}>
             <Pressable
+              android_ripple={{color: '#524e81'}}
               style={{
                 backgroundColor: '#272262',
                 padding: 12,
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderRadius: 12
+                borderRadius: 12,
               }}>
               <Text style={{color: 'white', fontFamily: 'Poppins SemiBold'}}>
                 Add Room

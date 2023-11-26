@@ -9,9 +9,19 @@ import {
 } from 'react-native';
 import SocialMediaButton from '../../templates/social-media-button';
 import {useNavigation} from '@react-navigation/core';
+import Toast from 'react-native-toast-message'
 
 export default function SignupScreen() {
   const navigation = useNavigation();
+
+  const alertMessage = () => {
+    Toast.show({
+      type: 'error',
+      text1: 'It is still... not functioning',
+      autoHide: true,
+      visibilityTime: 2500
+    })
+  }
 
   const goToSignin = () => {
     navigation.navigate('Signin' as never);
@@ -111,13 +121,14 @@ export default function SignupScreen() {
             </Text>
           </Pressable>
           <Text style={{fontFamily: 'Poppins Regular', color: 'black'}}>OR</Text>
-          <SocialMediaButton text="Sign up" />
+          <SocialMediaButton text="Sign up" onPress={alertMessage}/>
           <Pressable onPress={goToSignin}>
             <Text style={{fontFamily: 'Poppins Regular', color: 'black'}}>
               Already have an account? Sign in
             </Text>
           </Pressable>
         </View>
+        <Toast />
       </ScrollView>
     </SafeAreaView>
   );

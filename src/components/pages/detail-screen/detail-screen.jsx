@@ -12,12 +12,8 @@ import {
   ToastAndroid,
 } from 'react-native';
 import {useNavigation, StackActions} from '@react-navigation/core';
-import {
-  NativeStackNavigationProp,
-  NativeStackScreenProps,
-} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../../App';
-import {roomItem} from '../../../constants/room';
+import {roomItem} from '../../../variables/room';
+import Toast, {ErrorToast} from 'react-native-toast-message';
 
 const DetailScreen = ({route}) => {
   const navigation = useNavigation();
@@ -30,23 +26,23 @@ const DetailScreen = ({route}) => {
   };
 
   const goToGenerateQR = () => {
-    console.log("ini dari detail screen ya:\n", "cek: ",roomItem[id].check, "\nyang udah checkin: ", roomItem[id].checkedIn);
-    if (roomItem[id].check == false) {
-      if (password == roomItem[id].password) {
-        navigation.dispatch(StackActions.replace('Generate', {id}));
-      } else {
-        ToastAndroid.show('Wrong password!', ToastAndroid.SHORT);
-      }
+    if (password == roomItem[id].password) {
+      navigation.dispatch(StackActions.replace('Generate', {id}));
     } else {
-      ToastAndroid.show(
-        'You have already joined this room!',
-        ToastAndroid.SHORT,
-      );
+      ToastAndroid.show('Wrong password!', ToastAndroid.SHORT);
     }
   };
 
   const toggleModal = () => {
-    setIsModalVisible(!isModalVisible);
+    if (roomItem[id].check == true) {
+      Toast.show({
+        type: 'error',
+        autoHide: true,
+        visibilityTime: 2500,
+      });
+    } else {
+      setIsModalVisible(!isModalVisible);
+    }
   };
 
   console.log(id);
@@ -241,6 +237,22 @@ const DetailScreen = ({route}) => {
             </View>
           </View>
         </Modal>
+        <Toast
+          config={{
+            error: props => (
+              <ErrorToast
+                text2={`You have already joined this room at ${roomItem[id].joined}`}
+                text2Style={{
+                  fontFamily: 'Poppins Regular',
+                  fontSize: 12,
+                  color: 'black',
+                }}
+                autoHide={true}
+                visibilityTime={2500}
+              />
+            ),
+          }}
+        />
       </ScrollView>
     </SafeAreaView>
   );

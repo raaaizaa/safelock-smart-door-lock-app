@@ -33,7 +33,7 @@ export type RootStackParamList = {
   Home: undefined
   Detail: {id: number},
   Generate: {id: number},
-  Success: undefined,
+  Success: {id: number},
   AddRoom: undefined
 }
 

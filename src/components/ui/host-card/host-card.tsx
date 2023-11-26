@@ -30,7 +30,7 @@ export default function HostCard() {
           flexDirection: 'row',
           backgroundColor: '#272262',
         }}
-        android_ripple={{color: '#F1F0F0'}}
+        android_ripple={{color: '#524e81'}}
         onPress={goToAddRoom}>
         <Image
           source={{

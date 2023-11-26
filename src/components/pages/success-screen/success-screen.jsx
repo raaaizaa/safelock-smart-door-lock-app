@@ -1,14 +1,16 @@
-import { StackActions, useNavigation } from '@react-navigation/native';
+import {StackActions, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {View, Text, Image, Pressable} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {roomItem} from '../../../variables/room';
 
-export default function SuccessScreen() {
-  const navigation = useNavigation()
+export default function SuccessScreen({route}) {
+  const navigation = useNavigation();
+  const {id} = route.params;
 
   const back = () => {
-    navigation.dispatch(StackActions.pop(2))
-  }
+    navigation.dispatch(StackActions.replace('Home'));
+  };
 
   return (
     <SafeAreaView
@@ -40,19 +42,31 @@ export default function SuccessScreen() {
             You may now enter the meeting
           </Text>
         </View>
-        <Pressable
-          style={{backgroundColor: 'white', borderRadius: 6, padding: 8}}
-          android_ripple={{color: '#F1F0F0'}} onPress={back}>
+        <View style={{gap: 12}}>
           <Text
             style={{
-              fontFamily: 'Poppins Bold',
-              color: '#272262',
-              fontSize: 16,
+              color: 'white',
               textAlign: 'center',
+              fontFamily: 'Poppins Regular',
+              fontSize: 16,
             }}>
-            Back
+            Verified at {roomItem[id].joined}
           </Text>
-        </Pressable>
+          <Pressable
+            style={{backgroundColor: 'white', borderRadius: 6, padding: 8}}
+            android_ripple={{color: '#F1F0F0'}}
+            onPress={back}>
+            <Text
+              style={{
+                fontFamily: 'Poppins Bold',
+                color: '#272262',
+                fontSize: 16,
+                textAlign: 'center',
+              }}>
+              Back
+            </Text>
+          </Pressable>
+        </View>
       </View>
     </SafeAreaView>
   );

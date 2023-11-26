@@ -7,7 +7,7 @@ export default function SuccessScreen() {
   const navigation = useNavigation()
 
   const back = () => {
-    navigation.dispatch(StackActions.replace('Home'))
+    navigation.dispatch(StackActions.pop(2))
   }
 
   return (

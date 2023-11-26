@@ -9,7 +9,6 @@ import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -19,12 +18,7 @@ import {
 
 import {
   Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import FontProvider from './src/utils/font-provider';
 import {NavigationContainer} from '@react-navigation/native';
 import Router from './src/router/router';
 
@@ -38,7 +32,7 @@ export type RootStackParamList = {
   Signup: undefined,
   Home: undefined
   Detail: {id: number},
-  Generate: undefined,
+  Generate: {id: number},
   Success: undefined,
   AddRoom: undefined
 }

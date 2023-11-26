@@ -4,7 +4,6 @@ import {roomItem} from '../../../constants/room';
 import RoomCard from '../../ui/room-card/room-card';
 import HostCard from '../../ui/host-card/host-card';
 
-
 const Homescreen = () => {
   return (
     <SafeAreaView style={{flex: 1, flexDirection: 'column'}}>
@@ -13,7 +12,7 @@ const Homescreen = () => {
           style={{
             alignItems: 'flex-start',
             justifyContent: 'center',
-            backgroundColor: '#403B80',
+            backgroundColor: '#272262',
             paddingTop: 48,
             paddingBottom: 24,
           }}>
@@ -27,12 +26,12 @@ const Homescreen = () => {
             Hello there!
           </Text>
         </View>
-        <View style={{paddingVertical: 48}}>
+        <View style={{paddingVertical: 48, gap: 24}}>
           <View>
             <Text
               style={{
                 fontFamily: 'Poppins SemiBold',
-                color: '#403B80',
+                color: '#272262',
                 fontSize: 18,
                 paddingHorizontal: 24,
               }}>
@@ -57,7 +56,7 @@ const Homescreen = () => {
               <Text
                 style={{
                   fontFamily: 'Poppins SemiBold',
-                  color: '#403B80',
+                  color: '#272262',
                   fontSize: 18,
                   paddingHorizontal: 24,
                 }}>
@@ -70,6 +69,6 @@ const Homescreen = () => {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
-export default Homescreen
+export default Homescreen;

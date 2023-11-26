@@ -14,7 +14,7 @@ interface props {
 
 export default function SocialMediaButton({text}: props) {
   const alertMessage = () => {
-    ToastAndroid.show('It is still... not functionable...', ToastAndroid.SHORT);
+    ToastAndroid.show('It is still... not functioning ...', ToastAndroid.SHORT);
   };
 
   return (

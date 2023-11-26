@@ -11,7 +11,7 @@ import {
   Button,
   ToastAndroid,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/core';
+import {useNavigation, StackActions} from '@react-navigation/core';
 import {
   NativeStackNavigationProp,
   NativeStackScreenProps,
@@ -19,24 +19,29 @@ import {
 import {RootStackParamList} from '../../../../App';
 import {roomItem} from '../../../constants/room';
 
-type DetailProps = NativeStackScreenProps<RootStackParamList, 'Detail'>;
-
-const DetailScreen = ({route}: DetailProps) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+const DetailScreen = ({route}) => {
+  const navigation = useNavigation();
   const {id} = route.params;
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [password, setPassword] = useState('');
 
   const back = () => {
-    navigation.navigate('Home' as never);
+    navigation.navigate('Home');
   };
 
   const goToGenerateQR = () => {
-    if (password == selectedItem?.password) {
-      navigation.navigate('Generate' as never);
+    console.log("ini dari detail screen ya:\n", "cek: ",roomItem[id].check, "\nyang udah checkin: ", roomItem[id].checkedIn);
+    if (roomItem[id].check == false) {
+      if (password == roomItem[id].password) {
+        navigation.dispatch(StackActions.replace('Generate', {id}));
+      } else {
+        ToastAndroid.show('Wrong password!', ToastAndroid.SHORT);
+      }
     } else {
-      ToastAndroid.show('Wrong password!', ToastAndroid.SHORT);
+      ToastAndroid.show(
+        'You have already joined this room!',
+        ToastAndroid.SHORT,
+      );
     }
   };
 
@@ -44,11 +49,11 @@ const DetailScreen = ({route}: DetailProps) => {
     setIsModalVisible(!isModalVisible);
   };
 
-  const selectedItem = roomItem.find(item => item.id === id);
+  console.log(id);
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <ScrollView style={{backgroundColor: '#403B80', flex: 1}}>
+      <ScrollView style={{backgroundColor: '#272262', flex: 1}}>
         <View style={{flex: 1, backgroundColor: 'white'}}>
           <View
             style={{
@@ -92,7 +97,7 @@ const DetailScreen = ({route}: DetailProps) => {
                 paddingVertical: 24,
               }}>
               <Image
-                source={{uri: selectedItem?.image}}
+                source={{uri: roomItem[id].image}}
                 width={350}
                 height={300}
                 style={{borderRadius: 16}}
@@ -113,17 +118,17 @@ const DetailScreen = ({route}: DetailProps) => {
                       fontSize: 16,
                       color: 'black',
                     }}>
-                    Room {selectedItem?.name}
+                    Room {roomItem[id].name}
                   </Text>
                   <Text style={{fontFamily: 'Poppins Regular', color: 'black'}}>
-                    {selectedItem?.checkedIn}/{selectedItem?.capacity}
+                    {roomItem[id].checkedIn}/{roomItem[id].capacity}
                   </Text>
                 </View>
               </View>
             </View>
             <View
               style={{
-                backgroundColor: '#403B80',
+                backgroundColor: '#272262',
                 paddingHorizontal: 24,
                 paddingVertical: 12,
                 flex: 1,
@@ -145,7 +150,7 @@ const DetailScreen = ({route}: DetailProps) => {
                   color: 'white',
                   textAlign: 'left',
                 }}>
-                {selectedItem?.description}
+                {roomItem[id].description}
               </Text>
               <View
                 style={{
@@ -164,7 +169,7 @@ const DetailScreen = ({route}: DetailProps) => {
                     style={{
                       fontFamily: 'Poppins Bold',
                       textAlign: 'center',
-                      color: '#403B80',
+                      color: '#272262',
                     }}>
                     Join this room
                   </Text>

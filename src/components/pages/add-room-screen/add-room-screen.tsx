@@ -14,7 +14,7 @@ export default function AddRoomScreen() {
   const navigation = useNavigation();
 
   const back = () => {
-    navigation.dispatch(StackActions.replace('Home'));
+    navigation.dispatch(StackActions.pop(1));
   };
 
   return (
@@ -114,7 +114,7 @@ export default function AddRoomScreen() {
             style={{flex: 1, justifyContent: 'center', paddingHorizontal: 24}}>
             <Pressable
               style={{
-                backgroundColor: '#403B80',
+                backgroundColor: '#272262',
                 padding: 12,
                 justifyContent: 'center',
                 alignItems: 'center',

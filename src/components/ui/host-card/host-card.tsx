@@ -28,7 +28,7 @@ export default function HostCard() {
           justifyContent: 'space-between',
           flex: 1,
           flexDirection: 'row',
-          backgroundColor: '#403B80',
+          backgroundColor: '#272262',
         }}
         android_ripple={{color: '#F1F0F0'}}
         onPress={goToAddRoom}>

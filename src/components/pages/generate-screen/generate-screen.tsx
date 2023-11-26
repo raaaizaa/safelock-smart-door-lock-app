@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {
   View,
   ScrollView,
@@ -8,18 +8,106 @@ import {
   Image,
   Dimensions,
   RefreshControl,
+  ActivityIndicator,
 } from 'react-native';
-import GenerateQR from '../../templates/generate-qr-code';
-import {useNavigation, StackActions, useFocusEffect} from '@react-navigation/core';
+import {
+  useNavigation,
+  StackActions,
+  useFocusEffect,
+} from '@react-navigation/core';
 import {useState} from 'react';
+import database from '@react-native-firebase/database';
+import {generateString} from '../../../utils/generate-string';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../../../App';
+import { roomItem } from '../../../constants/room';
 
-export default function GenerateScreen() {
+type QRProps = NativeStackScreenProps<RootStackParamList, 'Generate'>;
+
+const IMAGE_SIZE = '500x500';
+
+function addQRToFirebase(qrString: number) {
+  database().ref().update({
+    storedQRString: qrString,
+  });
+}
+
+function fetchDoorStatus(setDoorStatus: React.Dispatch<React.SetStateAction<boolean>>) {
+  const onValueChange = database()
+    .ref()
+    .on('value', snapshot => {
+      console.log('doorStatus: ', snapshot.val().doorStatus);
+      setDoorStatus(snapshot.val().doorStatus);
+    });
+
+  return () => database().ref().off('value', onValueChange);
+}
+
+const GenerateQR = ({ id, navigation }: { id: number, navigation: any }) => {
+  const [uri, setUri] = useState('');
+  const [doorStatus, setDoorStatus] = useState(false);
+
+  const generateAndFetchData = () => {
+    const string = generateString();
+    const newUri = `https://api.qrserver.com/v1/create-qr-code/?size=${IMAGE_SIZE}&data=${string}`;
+    setUri(newUri);
+    addQRToFirebase(string);
+    fetchDoorStatus(setDoorStatus);
+  }
+
+  useEffect(() => {
+    generateAndFetchData()
+  }, []);
+
+  useEffect(() => {
+    if (doorStatus) {
+      roomItem[id].check = true
+      roomItem[id].checkedIn += 1
+      navigation.dispatch(StackActions.pop(1));
+      navigation.dispatch(StackActions.replace('Success'));
+    }
+  }, [doorStatus, id, navigation]);
+
+  return (
+    <View
+      style={{
+        alignItems: 'center',
+        backgroundColor: '#FFF',
+        overflow: 'hidden',
+      }}>
+      {uri === '' ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
+        <>
+          <Image source={{uri: uri}} style={{width: 350, height: 350}} />
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: 'Poppins Medium',
+              color: 'black',
+              paddingVertical: 24,
+            }}>
+            Direct this QR code toward the camera!
+          </Text>
+        </>
+      )}
+    </View>
+  );
+};
+
+
+export default function GenerateScreen({route}: QRProps) {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const {id} = route.params
   const [refresh, setRefresh] = useState(false);
-  const navigation = useNavigation();
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height - 96;
 
   const pullMe = useCallback(() => {
+    
     setRefresh(true);
 
     setTimeout(() => {
@@ -28,7 +116,7 @@ export default function GenerateScreen() {
   }, []);
 
   const back = () => {
-    navigation.dispatch(StackActions.pop(1))
+    navigation.dispatch(StackActions.pop(1));
   };
 
   useFocusEffect(
@@ -36,6 +124,7 @@ export default function GenerateScreen() {
       pullMe();
     }, [pullMe]),
   );
+
   return (
     <SafeAreaView>
       <ScrollView
@@ -60,7 +149,12 @@ export default function GenerateScreen() {
                 height={30}
               />
             </Pressable>
-            <Text style={{fontFamily: 'Poppins Bold', fontSize: 16, color:'black'}}>
+            <Text
+              style={{
+                fontFamily: 'Poppins Bold',
+                fontSize: 16,
+                color: 'black',
+              }}>
               QR Code
             </Text>
             <Pressable>
@@ -81,7 +175,7 @@ export default function GenerateScreen() {
               height: windowHeight,
               gap: 48,
             }}>
-            <GenerateQR />
+            <GenerateQR id={id} navigation={navigation} />
           </View>
         </View>
       </ScrollView>

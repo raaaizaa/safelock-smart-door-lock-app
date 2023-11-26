@@ -32,7 +32,7 @@ export default function SigninScreen() {
           style={{
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#403B80',
+            backgroundColor: '#272262',
             paddingVertical: 48,
           }}>
           <Text

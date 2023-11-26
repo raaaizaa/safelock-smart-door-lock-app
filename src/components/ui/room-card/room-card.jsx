@@ -27,8 +27,8 @@ export default function RoomCard({id, name, image}) {
           height={200}
           style={{borderRadius: 12}}
         />
-        <View style={{padding: 6, borderRadius: 12}}>
-          <Text style={{fontFamily: 'Poppins SemiBold', color: 'black'}}>
+        <View style={{padding: 12, borderRadius: 12, flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+          <Text style={{fontFamily: 'Poppins SemiBold', color: 'black', fontSize: 14}}>
             Room {name}
           </Text>
           <Pressable
@@ -45,7 +45,7 @@ export default function RoomCard({id, name, image}) {
             <Text
               style={{
                 fontFamily: 'Poppins SemiBold',
-                fontSize: 11,
+                fontSize: 14,
                 color: 'black',
               }}>
               Check

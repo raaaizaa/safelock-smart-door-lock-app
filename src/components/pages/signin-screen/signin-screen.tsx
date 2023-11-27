@@ -30,9 +30,17 @@ export default function SigninScreen() {
   };
 
   const goToHome = () => {
-    // if(email === "dummy@gmail.com" && password === "dummy"){
-    // }
-    navigation.dispatch(StackActions.replace('Home'))
+    if(email === "dummy@gmail.com" && password === "dummy"){
+      navigation.dispatch(StackActions.replace('Home'))
+    }else{
+      Toast.show({
+        type: 'error',
+        text1: `Sign in with "dummy@gmail.com" and "dummy" as password`,
+        text2:'Due to development, we still hardcode the sign in system',
+        autoHide: true,
+        visibilityTime: 2500
+      })
+    }
   };
 
   return (

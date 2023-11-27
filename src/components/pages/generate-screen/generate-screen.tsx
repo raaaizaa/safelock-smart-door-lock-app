@@ -23,7 +23,7 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../../App';
-import { roomItem } from '../../../variables/room';
+import {roomItem} from '../../../variables/room';
 
 type QRProps = NativeStackScreenProps<RootStackParamList, 'Generate'>;
 
@@ -35,45 +35,47 @@ function addQRToFirebase(qrString: number) {
   });
 }
 
-function fetchDoorStatus(setDoorStatus: React.Dispatch<React.SetStateAction<boolean>>) {
+function fetchDoorStatus(
+  setDoorStatus: React.Dispatch<React.SetStateAction<boolean>>,
+) { 
   const onValueChange = database()
     .ref()
     .on('value', snapshot => {
-      console.log('doorStatus: ', snapshot.val().doorStatus);
       setDoorStatus(snapshot.val().doorStatus);
     });
 
   return () => database().ref().off('value', onValueChange);
 }
 
-function getCurrentTime () {
-  const today = new Date()
-  const time = today.toLocaleTimeString()
+function getCurrentTime() {
+  const today = new Date();
+  const time = today.toLocaleTimeString();
 
-  return time
+  return time;
 }
 
-const GenerateQR = ({ id, navigation }: { id: number, navigation: any }) => {
+const GenerateQR = ({id, navigation}: {id: number; navigation: any}) => {
   const [uri, setUri] = useState('');
   const [doorStatus, setDoorStatus] = useState(false);
 
   const generateAndFetchData = () => {
     const string = generateString();
-    const newUri = `https://api.qrserver.com/v1/create-qr-code/?size=${IMAGE_SIZE}&data=${string}`;
+    const newUri = 
+    `https://api.qrserver.com/v1/create-qr-code/?size=${IMAGE_SIZE}&data=${string}`;
     setUri(newUri);
     addQRToFirebase(string);
     fetchDoorStatus(setDoorStatus);
-  }
+  };
 
   useEffect(() => {
-    generateAndFetchData()
+    generateAndFetchData();
   }, []);
 
   useEffect(() => {
     if (doorStatus) {
-      roomItem[id].check = true
-      roomItem[id].checkedIn += 1
-      roomItem[id].joined = getCurrentTime()
+      roomItem[id].check = true;
+      roomItem[id].checkedIn += 1;
+      roomItem[id].joined = getCurrentTime();
       navigation.dispatch(StackActions.pop(1));
       navigation.dispatch(StackActions.replace('Success', {id}));
     }
@@ -106,16 +108,15 @@ const GenerateQR = ({ id, navigation }: { id: number, navigation: any }) => {
   );
 };
 
-
 export default function GenerateScreen({route}: QRProps) {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const {id} = route.params
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const {id} = route.params;
   const [refresh, setRefresh] = useState(false);
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height - 96;
 
   const pullMe = useCallback(() => {
-    
     setRefresh(true);
 
     setTimeout(() => {

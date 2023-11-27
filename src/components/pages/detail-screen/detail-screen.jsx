@@ -8,7 +8,6 @@ import {
   Pressable,
   Modal,
   TextInput,
-  Button,
   ToastAndroid,
 } from 'react-native';
 import {useNavigation, StackActions} from '@react-navigation/core';
@@ -44,8 +43,6 @@ const DetailScreen = ({route}) => {
       setIsModalVisible(!isModalVisible);
     }
   };
-
-  console.log(id);
 
   return (
     <SafeAreaView style={{flex: 1}}>

@@ -40,7 +40,7 @@ const Homescreen = () => {
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
-              style={{marginTop: 8,}}>
+              style={{marginTop: 8}}>
               {roomItem.map((data, index) => (
                 <RoomCard
                   key={index}

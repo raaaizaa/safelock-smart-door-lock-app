@@ -6,7 +6,6 @@ export default function HostCard() {
   const navigation = useNavigation();
 
   const goToAddRoom = () => {
-    console.log('tes')
     navigation.navigate('AddRoom' as never);
   };
 
